@@ -9,8 +9,8 @@ use quoted_string::{self, ContentChars, AsciiCaseInsensitiveEq};
 ///
 /// # Example
 /// ```
-/// let mime = mime::TEXT_PLAIN_UTF_8;
-/// assert_eq!(mime.param(mime::CHARSET), Some(mime::UTF_8));
+/// let mime = neo_mime::TEXT_PLAIN_UTF_8;
+/// assert_eq!(mime.param(neo_mime::CHARSET), Some(neo_mime::UTF_8));
 /// ```
 pub const UTF_8: Value = Value {
     source: "utf-8",
@@ -65,7 +65,7 @@ impl<'a> Value<'a> {
     /// # Example
     ///
     /// ```
-    /// let mime = r#"text/plain; param="abc def""#.parse::<mime::MediaType>().unwrap();
+    /// let mime = r#"text/plain; param="abc def""#.parse::<neo_mime::MediaType>().unwrap();
     /// let param = mime.param("param").unwrap();
     /// assert_eq!(param.as_str_repr(), r#""abc def""#);
     /// ```
@@ -93,7 +93,7 @@ impl<'a> Value<'a> {
     ///
     /// ```
     /// let raw_mime = r#"text/plain; p1="char is \""; p2="simple"; p3=simple2"#;
-    /// let mime = raw_mime.parse::<mime::MediaType>().unwrap();
+    /// let mime = raw_mime.parse::<neo_mime::MediaType>().unwrap();
     ///
     /// let param1 = mime.param("p1").unwrap();
     /// let expected = r#"char is ""#;

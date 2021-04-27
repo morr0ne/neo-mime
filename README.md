@@ -4,11 +4,11 @@
 
 [![Build Status](https://travis-ci.org/morr0ne/neo-mime.svg?branch=main)](https://travis-ci.org/morr0ne/neo-mime)
 [![crates.io](https://img.shields.io/crates/v/mime.svg)](https://crates.io/crates/mime)
-[![docs.rs](https://docs.rs/mime/badge.svg)](https://docs.rs/mime)
+[![docs.rs](https://docs.rs/neo-mime/badge.svg)](https://docs.rs/neo-mime)
 
 Support MIME (HTTP Media Types) as strong types in Rust.
 
-[Documentation](https://docs.rs/mime)
+[Documentation](https://docs.rs/neo-mime)
 
 ## Usage
 

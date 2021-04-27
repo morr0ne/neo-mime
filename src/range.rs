@@ -13,16 +13,16 @@ use crate::{InvalidMime, MediaType, Value};
 /// # Example
 ///
 /// ```
-/// use mime::MediaRange;
+/// use neo_mime::MediaRange;
 ///
 /// // Suppose this was parsed from an `Accept` header
 /// let range = MediaRange::parse("text/*").unwrap();
 ///
 /// // The formats of the resource that we have:
 /// let formats = vec![
-///     mime::APPLICATION_JSON,
-///     mime::TEXT_PLAIN_UTF_8,
-///     mime::TEXT_HTML,
+///     neo_mime::APPLICATION_JSON,
+///     neo_mime::TEXT_PLAIN_UTF_8,
+///     neo_mime::TEXT_HTML,
 /// ];
 ///
 /// for format in &formats {
@@ -43,8 +43,8 @@ impl MediaRange {
     /// # Example
     ///
     /// ```
-    /// let range = mime::MediaRange::parse("*/*").unwrap();
-    /// assert_eq!(range, mime::STAR_STAR);
+    /// let range = neo_mime::MediaRange::parse("*/*").unwrap();
+    /// assert_eq!(range, neo_mime::STAR_STAR);
     /// ```
     ///
     /// # Errors
@@ -63,9 +63,9 @@ impl MediaRange {
     /// # Example
     ///
     /// ```
-    /// let range = mime::TEXT_STAR;
+    /// let range = neo_mime::TEXT_STAR;
     /// assert_eq!(range.type_(), "text");
-    /// assert_eq!(range.type_(), mime::TEXT);
+    /// assert_eq!(range.type_(), neo_mime::TEXT);
     /// ```
     #[inline]
     pub fn type_(&self) -> &str {
@@ -77,13 +77,13 @@ impl MediaRange {
     /// # Example
     ///
     /// ```
-    /// let range = mime::TEXT_STAR;
+    /// let range = neo_mime::TEXT_STAR;
     ///
     /// assert_eq!(range.subtype(), "*");
-    /// assert_eq!(range.subtype(), mime::STAR);
+    /// assert_eq!(range.subtype(), neo_mime::STAR);
     ///
-    /// let exact = mime::MediaRange::from(mime::TEXT_PLAIN);
-    /// assert_eq!(exact.subtype(), mime::PLAIN);
+    /// let exact = neo_mime::MediaRange::from(neo_mime::TEXT_PLAIN);
+    /// assert_eq!(exact.subtype(), neo_mime::PLAIN);
     /// assert_eq!(exact.subtype(), "plain");
     /// ```
     #[inline]
@@ -96,13 +96,13 @@ impl MediaRange {
     /// # Example
     ///
     /// ```
-    /// let svg = mime::MediaRange::from(mime::IMAGE_SVG);
+    /// let svg = neo_mime::MediaRange::from(neo_mime::IMAGE_SVG);
     ///
-    /// assert_eq!(svg.suffix(), Some(mime::XML));
+    /// assert_eq!(svg.suffix(), Some(neo_mime::XML));
     /// assert_eq!(svg.suffix().unwrap(), "xml");
     ///
     ///
-    /// let any = mime::STAR_STAR;
+    /// let any = neo_mime::STAR_STAR;
     ///
     /// assert_eq!(any.suffix(), None);
     /// ```
@@ -116,12 +116,12 @@ impl MediaRange {
     /// # Example
     ///
     /// ```
-    /// let images = mime::IMAGE_STAR;
+    /// let images = neo_mime::IMAGE_STAR;
     ///
-    /// assert!(images.matches(&mime::IMAGE_JPEG));
-    /// assert!(images.matches(&mime::IMAGE_PNG));
+    /// assert!(images.matches(&neo_mime::IMAGE_JPEG));
+    /// assert!(images.matches(&neo_mime::IMAGE_PNG));
     ///
-    /// assert!(!images.matches(&mime::TEXT_PLAIN));
+    /// assert!(!images.matches(&neo_mime::TEXT_PLAIN));
     /// ```
     pub fn matches(&self, mt: &MediaType) -> bool {
         let type_ = self.type_();
@@ -167,9 +167,9 @@ impl MediaRange {
     /// # Example
     ///
     /// ```
-    /// let range = mime::MediaRange::from(mime::TEXT_PLAIN_UTF_8);
+    /// let range = neo_mime::MediaRange::from(neo_mime::TEXT_PLAIN_UTF_8);
     ///
-    /// assert_eq!(range.param(mime::CHARSET), Some(mime::UTF_8));
+    /// assert_eq!(range.param(neo_mime::CHARSET), Some(neo_mime::UTF_8));
     /// assert_eq!(range.param("charset").unwrap(), "utf-8");
     /// assert_eq!(range.param("boundary"), None);
     /// ```
@@ -182,7 +182,7 @@ impl MediaRange {
     /// # Example
     ///
     /// ```
-    /// let pkcs7 = mime::MediaRange::parse(
+    /// let pkcs7 = neo_mime::MediaRange::parse(
     ///     "application/pkcs7-mime; smime-type=enveloped-data; name=smime.p7m"
     /// ).unwrap();
     ///
@@ -208,10 +208,10 @@ impl MediaRange {
     /// # Example
     ///
     /// ```
-    /// let plain_text: mime::MediaType = "text/plain".parse().unwrap();
+    /// let plain_text: neo_mime::MediaType = "text/plain".parse().unwrap();
     /// assert_eq!(plain_text.has_params(), false);
     ///
-    /// let plain_text_utf8: mime::MediaType = "text/plain; charset=utf-8".parse().unwrap();
+    /// let plain_text_utf8: neo_mime::MediaType = "text/plain; charset=utf-8".parse().unwrap();
     /// assert_eq!(plain_text_utf8.has_params(), true);
     /// ```
     #[inline]
@@ -231,7 +231,7 @@ impl MediaRange {
 ///
 /// ```
 /// // If we only supported `text/plain`:
-/// let range = mime::MediaRange::from(mime::TEXT_PLAIN);
+/// let range = neo_mime::MediaRange::from(neo_mime::TEXT_PLAIN);
 /// ```
 impl From<MediaType> for MediaRange {
     fn from(mt: MediaType) -> MediaRange {

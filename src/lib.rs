@@ -1,4 +1,4 @@
-#![doc(html_root_url = "https://docs.rs/mime/0.3.6")]
+#![doc(html_root_url = "https://docs.rs/neo-mime/0.3.6")]
 #![deny(warnings)]
 #![deny(missing_docs)]
 #![deny(missing_debug_implementations)]
@@ -18,9 +18,9 @@
 //! There are several constants exported for common media types:
 //!
 //! ```
-//! let text = mime::TEXT_PLAIN;
-//! let svg = mime::IMAGE_SVG;
-//! let json = mime::APPLICATION_JSON;
+//! let text = neo_mime::TEXT_PLAIN;
+//! let svg = neo_mime::IMAGE_SVG;
+//! let json = neo_mime::APPLICATION_JSON;
 //! // etc
 //! ```
 //!
@@ -28,8 +28,8 @@
 //! a `Content-Type` HTTP header:
 //!
 //! ```
-//! match mime::MediaType::parse("text/plain; charset=utf-8") {
-//!     Ok(text) => assert_eq!(text, mime::TEXT_PLAIN_UTF_8),
+//! match neo_mime::MediaType::parse("text/plain; charset=utf-8") {
+//!     Ok(text) => assert_eq!(text, neo_mime::TEXT_PLAIN_UTF_8),
 //!     Err(err) => panic!("you should handle this parse error: {}", err),
 //! }
 //! ```
@@ -42,10 +42,10 @@
 //! typos, many common type names are available as constants.
 //!
 //! ```
-//! let mime = mime::TEXT_PLAIN;
+//! let mime = neo_mime::TEXT_PLAIN;
 //! match (mime.type_(), mime.subtype()) {
-//!     (mime::TEXT, mime::PLAIN) => println!("plain text!"),
-//!     (mime::TEXT, _) => println!("structured text"),
+//!     (neo_mime::TEXT, neo_mime::PLAIN) => println!("plain text!"),
+//!     (neo_mime::TEXT, _) => println!("structured text"),
 //!     _ => println!("not text"),
 //! }
 //! ```
@@ -65,16 +65,16 @@
 //! the `MediaType`s you have would satisfy them.
 //!
 //! ```
-//! match mime::MediaRange::parse("text/*") {
+//! match neo_mime::MediaRange::parse("text/*") {
 //!     Ok(range) => {
 //!         // There's a couple constants in case you don't need parsing...
-//!         assert_eq!(range, mime::TEXT_STAR);
+//!         assert_eq!(range, neo_mime::TEXT_STAR);
 //!
 //!         // "text/plain" is a match
-//!         assert!(range.matches(&mime::TEXT_PLAIN));
+//!         assert!(range.matches(&neo_mime::TEXT_PLAIN));
 //!
 //!         // "application/json" is NOT
-//!         assert!(!range.matches(&mime::APPLICATION_JSON));
+//!         assert!(!range.matches(&neo_mime::APPLICATION_JSON));
 //!
 //!     },
 //!     Err(err) => panic!("that's a bad range: {}", err),
@@ -100,7 +100,7 @@ use proc_macro_hack::proc_macro_hack;
 /// # Example
 ///
 /// ```
-/// const VND_MYAPP: mime::MediaType = mime::media_type!("application/vnd.myapp+json");
+/// const VND_MYAPP: neo_mime::MediaType = neo_mime::media_type!("application/vnd.myapp+json");
 /// ```
 #[cfg(feature = "macro")]
 #[proc_macro_hack]
