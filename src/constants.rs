@@ -42,7 +42,7 @@ macro_rules! mime_constant {
     (@DOC $doc:expr, $kind:ident, $id:ident, $src:expr) => (
         #[doc = $doc]
         pub const $id: $kind = $kind {
-            mime: mime_parse::constants::$id,
+            mime: neo_mime_parse::constants::$id,
         };
     )
 }

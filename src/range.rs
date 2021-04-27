@@ -1,7 +1,7 @@
 use std::fmt;
 use std::str::FromStr;
 
-use mime_parse::{Mime, Parse};
+use neo_mime_parse::{Mime, Parse};
 
 use crate::{InvalidMime, MediaType, Value};
 
@@ -52,7 +52,7 @@ impl MediaRange {
     /// Returns an error if the source is not a valid media range.
     #[inline]
     pub fn parse(source: impl Parse) -> Result<Self, InvalidMime> {
-        mime_parse::Parser::can_range()
+        neo_mime_parse::Parser::can_range()
             .parse(source)
             .map(|mime| MediaRange { mime })
             .map_err(|e| InvalidMime { inner: e })

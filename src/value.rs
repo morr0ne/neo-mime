@@ -2,7 +2,7 @@ use std::cmp::PartialEq;
 use std::fmt;
 use std::borrow::Cow;
 
-use mime_parse::Mime;
+use neo_mime_parse::Mime;
 use quoted_string::{self, ContentChars, AsciiCaseInsensitiveEq};
 
 /// a `Value` usable for a charset parameter.

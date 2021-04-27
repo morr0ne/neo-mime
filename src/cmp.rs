@@ -1,4 +1,4 @@
-use mime_parse::{Mime, Parser};
+use neo_mime_parse::{Mime, Parser};
 
 pub(crate) fn str_eq(mime: &Mime, s: &str) -> bool {
     if mime.has_params() {

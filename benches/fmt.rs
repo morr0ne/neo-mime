@@ -1,6 +1,6 @@
 #![feature(test)]
 
-extern crate mime;
+extern crate neo_mime;
 extern crate test;
 
 use test::Bencher;
@@ -8,7 +8,7 @@ use test::Bencher;
 #[bench]
 fn bench_fmt(b: &mut Bencher) {
     use std::fmt::Write;
-    let mime = ::mime::TEXT_PLAIN_UTF_8;
+    let mime = ::neo_mime::TEXT_PLAIN_UTF_8;
     b.bytes = mime.to_string().as_bytes().len() as u64;
     let mut s = String::with_capacity(64);
     b.iter(|| {

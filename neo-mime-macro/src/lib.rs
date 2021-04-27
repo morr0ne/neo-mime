@@ -38,9 +38,9 @@ pub fn media_type(tokens: TokenStream) -> TokenStream {
         None => quote! { ::std::option::Option::None },
     };
     let params = match mime.private_params_source() {
-        mime_parse::ParamSource::None => quote! { $crate::private::ParamSource::None },
-        mime_parse::ParamSource::Utf8(sc) => quote! { $crate::private::ParamSource::Utf8(#sc) },
-        mime_parse::ParamSource::One(sc, ((na, nz), (va, vz))) => quote! {
+        neo_mime_parse::ParamSource::None => quote! { $crate::private::ParamSource::None },
+        neo_mime_parse::ParamSource::Utf8(sc) => quote! { $crate::private::ParamSource::Utf8(#sc) },
+        neo_mime_parse::ParamSource::One(sc, ((na, nz), (va, vz))) => quote! {
             $crate::private::ParamSource::One(#sc, ((#na, #nz), (#va, #vz)))
         },
         _ => unreachable!("custom params quote"),
@@ -61,14 +61,14 @@ pub fn media_type(tokens: TokenStream) -> TokenStream {
     out.into()
 }
 
-fn parse_mime_lit(value: &str) -> Result<mime_parse::Mime, String> {
-    let mime = mime_parse::Parser::cannot_range().parse(value);
+fn parse_mime_lit(value: &str) -> Result<neo_mime_parse::Mime, String> {
+    let mime = neo_mime_parse::Parser::cannot_range().parse(value);
 
     match mime {
         Ok(mime) => match mime.private_params_source() {
-            mime_parse::ParamSource::None |
-            mime_parse::ParamSource::Utf8(_) => Ok(mime),
-            mime_parse::ParamSource::One(..) => Ok(mime),
+            neo_mime_parse::ParamSource::None |
+            neo_mime_parse::ParamSource::Utf8(_) => Ok(mime),
+            neo_mime_parse::ParamSource::One(..) => Ok(mime),
             _ => Err("multiple parameters not supported yet".into())
         },
         Err(err) => {

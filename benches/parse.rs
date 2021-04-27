@@ -1,9 +1,9 @@
 #![feature(test)]
 
-extern crate mime;
+extern crate neo_mime;
 extern crate test;
 
-use mime::MediaType;
+use neo_mime::MediaType;
 use test::Bencher;
 
 
