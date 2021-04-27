@@ -12,7 +12,7 @@ edition = "2018"
 [dependencies]
 neo-mime-macro = { path = "./neo-mime-macro", version = "0.1.0", optional = true }
 neo-mime-parse = { path = "./neo-mime-parse", version = "0.1.0" }
-proc-macro-hack = { version = "0.5", optional = true }
+proc-macro-hack = { version = "0.5.19", optional = true }
 quoted-string = "0.2.2"
 serde = { version = "1.0.125", optional = true }
 
