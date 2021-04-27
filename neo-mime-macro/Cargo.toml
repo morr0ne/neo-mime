@@ -1,6 +1,6 @@
 [package]
 name = "neo-mime-macro"
-version = "0.1.0"
+version = "0.1.1"
 description = "mime procedural macros"
 repository = "https://github.com/morr0ne/neo-mime"
 authors = ["Federico Morrone <contact@morrone.dev>", "Sean McArthur <sean@seanmonstar.com>"]
