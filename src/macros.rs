@@ -10,8 +10,8 @@ impl MediaType {
     /// # Tests
     ///
     /// ```
-    /// let foo = mime::media_type!("text/foo");
-    /// assert_eq!(foo.type_(), mime::TEXT);
+    /// let foo = neo_mime::media_type!("text/foo");
+    /// assert_eq!(foo.type_(), neo_mime::TEXT);
     /// assert_eq!(foo.subtype(), "foo");
     /// assert_eq!(foo.suffix(), None);
     /// assert!(!foo.has_params());
@@ -20,35 +20,35 @@ impl MediaType {
     /// # Uppercase
     ///
     /// ```
-    /// mime::media_type!("TEXT/PLAIN");
+    /// neo_mime::media_type!("TEXT/PLAIN");
     /// ```
     ///
     /// # Parameters
     ///
     /// ```compile_fail
-    /// mime::media_type!("multipart/form-data; boundary=abcd; two=2");
+    /// neo_mime::media_type!("multipart/form-data; boundary=abcd; two=2");
     /// ```
     ///
     /// # Ranges
     ///
     /// ```compile_fail
-    /// mime::media_type!("text/*");
+    /// neo_mime::media_type!("text/*");
     /// ```
     ///
     /// # String literal
     ///
     /// ```compile_fail
-    /// mime::media_type!(text/foo);
+    /// neo_mime::media_type!(text/foo);
     /// ```
     ///
     /// ```compile_fail
-    /// mime::media_type!("text/foo", "+json");
+    /// neo_mime::media_type!("text/foo", "+json");
     /// ```
     ///
     /// # Dynamic Formatting
     ///
     /// ```compile_fail
-    /// mime::media_type!("text/foo+{}", "json");
+    /// neo_mime::media_type!("text/foo+{}", "json");
     /// ```
     #[doc(hidden)]
     #[cfg(feature = "macro")]

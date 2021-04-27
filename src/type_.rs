@@ -12,9 +12,9 @@ use crate::{InvalidMime, Value};
 /// There are several constants exported for common media types:
 ///
 /// ```
-/// let text = mime::TEXT_PLAIN;
-/// let svg = mime::IMAGE_SVG;
-/// let json = mime::APPLICATION_JSON;
+/// let text = neo_mime::TEXT_PLAIN;
+/// let svg = neo_mime::IMAGE_SVG;
+/// let json = neo_mime::APPLICATION_JSON;
 /// // etc
 /// ```
 ///
@@ -22,8 +22,8 @@ use crate::{InvalidMime, Value};
 /// a `Content-Type` HTTP header:
 ///
 /// ```
-/// match mime::MediaType::parse("text/plain; charset=utf-8") {
-///     Ok(text) => assert_eq!(text, mime::TEXT_PLAIN_UTF_8),
+/// match neo_mime::MediaType::parse("text/plain; charset=utf-8") {
+///     Ok(text) => assert_eq!(text, neo_mime::TEXT_PLAIN_UTF_8),
 ///     Err(err) => panic!("you should handle this parse error: {}", err),
 /// }
 /// ```
@@ -36,10 +36,10 @@ use crate::{InvalidMime, Value};
 /// typos, many common type names are available as constants.
 ///
 /// ```
-/// let mime = mime::TEXT_PLAIN;
+/// let mime = neo_mime::TEXT_PLAIN;
 /// match (mime.type_(), mime.subtype()) {
-///     (mime::TEXT, mime::PLAIN) => println!("plain text!"),
-///     (mime::TEXT, _) => println!("structured text"),
+///     (neo_mime::TEXT, neo_mime::PLAIN) => println!("plain text!"),
+///     (neo_mime::TEXT, _) => println!("structured text"),
 ///     _ => println!("not text"),
 /// }
 /// ```
@@ -60,8 +60,8 @@ impl MediaType {
     /// # Example
     ///
     /// ```
-    /// let mt = mime::MediaType::parse("text/plain").unwrap();
-    /// assert_eq!(mt, mime::TEXT_PLAIN);
+    /// let mt = neo_mime::MediaType::parse("text/plain").unwrap();
+    /// assert_eq!(mt, neo_mime::TEXT_PLAIN);
     /// ```
     ///
     /// # Errors
@@ -80,9 +80,9 @@ impl MediaType {
     /// # Example
     ///
     /// ```
-    /// let mime = mime::TEXT_PLAIN;
+    /// let mime = neo_mime::TEXT_PLAIN;
     /// assert_eq!(mime.type_(), "text");
-    /// assert_eq!(mime.type_(), mime::TEXT);
+    /// assert_eq!(mime.type_(), neo_mime::TEXT);
     /// ```
     #[inline]
     pub fn type_(&self) -> &str {
@@ -94,12 +94,12 @@ impl MediaType {
     /// # Example
     ///
     /// ```
-    /// let mime = mime::TEXT_PLAIN;
+    /// let mime = neo_mime::TEXT_PLAIN;
     /// assert_eq!(mime.subtype(), "plain");
-    /// assert_eq!(mime.subtype(), mime::PLAIN);
+    /// assert_eq!(mime.subtype(), neo_mime::PLAIN);
     ///
-    /// let svg = mime::IMAGE_SVG;
-    /// assert_eq!(svg.subtype(), mime::SVG);
+    /// let svg = neo_mime::IMAGE_SVG;
+    /// assert_eq!(svg.subtype(), neo_mime::SVG);
     /// assert_eq!(svg.subtype(), "svg+xml");
     /// ```
     #[inline]
@@ -112,12 +112,12 @@ impl MediaType {
     /// # Example
     ///
     /// ```
-    /// let svg = mime::IMAGE_SVG;
-    /// assert_eq!(svg.suffix(), Some(mime::XML));
+    /// let svg = neo_mime::IMAGE_SVG;
+    /// assert_eq!(svg.suffix(), Some(neo_mime::XML));
     /// assert_eq!(svg.suffix(), Some("xml"));
     ///
     ///
-    /// assert!(mime::TEXT_PLAIN.suffix().is_none());
+    /// assert!(neo_mime::TEXT_PLAIN.suffix().is_none());
     /// ```
     #[inline]
     pub fn suffix(&self) -> Option<&str> {
@@ -129,13 +129,13 @@ impl MediaType {
     /// # Example
     ///
     /// ```
-    /// let mime = mime::TEXT_PLAIN_UTF_8;
-    /// assert_eq!(mime.param(mime::CHARSET), Some(mime::UTF_8));
+    /// let mime = neo_mime::TEXT_PLAIN_UTF_8;
+    /// assert_eq!(mime.param(neo_mime::CHARSET), Some(neo_mime::UTF_8));
     /// assert_eq!(mime.param("charset").unwrap(), "utf-8");
     /// assert!(mime.param("boundary").is_none());
     ///
-    /// let mime = "multipart/form-data; boundary=ABCDEFG".parse::<mime::MediaType>().unwrap();
-    /// assert_eq!(mime.param(mime::BOUNDARY).unwrap(), "ABCDEFG");
+    /// let mime = "multipart/form-data; boundary=ABCDEFG".parse::<neo_mime::MediaType>().unwrap();
+    /// assert_eq!(mime.param(neo_mime::BOUNDARY).unwrap(), "ABCDEFG");
     /// ```
     pub fn param<'a>(&'a self, attr: &str) -> Option<Value<'a>> {
         crate::value::param(&self.mime, attr)
@@ -147,7 +147,7 @@ impl MediaType {
     /// # Example
     ///
     /// ```
-    /// let pkcs7 = mime::MediaType::parse(
+    /// let pkcs7 = neo_mime::MediaType::parse(
     ///     "application/pkcs7-mime; smime-type=enveloped-data; name=smime.p7m"
     /// ).unwrap();
     ///
@@ -173,10 +173,10 @@ impl MediaType {
     /// # Example
     ///
     /// ```
-    /// let plain_text: mime::MediaType = "text/plain".parse().unwrap();
+    /// let plain_text: neo_mime::MediaType = "text/plain".parse().unwrap();
     /// assert_eq!(plain_text.has_params(), false);
     ///
-    /// let plain_text_utf8: mime::MediaType = "text/plain; charset=utf-8".parse().unwrap();
+    /// let plain_text_utf8: neo_mime::MediaType = "text/plain; charset=utf-8".parse().unwrap();
     /// assert_eq!(plain_text_utf8.has_params(), true);
     /// ```
     #[inline]
@@ -189,7 +189,7 @@ impl MediaType {
     /// # Example
     ///
     /// ```
-    /// use mime::MediaType;
+    /// use neo_mime::MediaType;
     ///
     /// let html_xml_utf8 = MediaType::parse("text/html+xml; charset=utf-8").unwrap();
     /// assert!(html_xml_utf8.has_params());
