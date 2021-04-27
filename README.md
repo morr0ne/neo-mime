@@ -2,7 +2,7 @@
 
 # mime
 
-[![Build Status](https://travis-ci.org/hyperium/mime.svg?branch=master)](https://travis-ci.org/hyperium/mime)
+[![Build Status](https://travis-ci.org/morr0ne/neo-mime.svg?branch=main)](https://travis-ci.org/morr0ne/neo-mime)
 [![crates.io](https://img.shields.io/crates/v/mime.svg)](https://crates.io/crates/mime)
 [![docs.rs](https://docs.rs/mime/badge.svg)](https://docs.rs/mime)
 

@@ -1,7 +1,7 @@
 use std::error::Error;
 use std::fmt;
 
-use mime_parse::ParseError;
+use neo_mime_parse::ParseError;
 
 /// An error type representing an invalid `MediaType` or `MediaRange`.
 #[derive(Debug)]

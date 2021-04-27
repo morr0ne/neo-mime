@@ -1,0 +1,8 @@
+[package]
+name = "neo-mime-parse"
+version = "0.1.0"
+description = "mime parsing internals"
+repository = "https://github.com/morr0ne/neo-mime"
+authors = ["Federico Morrone <contact@morrone.dev>", "Sean McArthur <sean@seanmonstar.com>"]
+license = "MIT"
+edition = "2018"

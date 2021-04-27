@@ -104,9 +104,9 @@ use proc_macro_hack::proc_macro_hack;
 /// ```
 #[cfg(feature = "macro")]
 #[proc_macro_hack]
-pub use mime_macro::media_type;
+pub use neo_mime_macro::media_type;
 
-pub use mime_parse::constants::names::*;
+pub use neo_mime_parse::constants::names::*;
 pub use self::constants::mimes::*;
 pub use self::error::InvalidMime;
 pub use self::range::MediaRange;
@@ -142,7 +142,7 @@ fn _assert_traits() {
 #[cfg(feature = "macro")]
 pub mod private {
     #[doc(hidden)]
-    pub use mime_parse::{Mime, ParamSource, Source};
+    pub use neo_mime_parse::{Mime, ParamSource, Source};
 }
 
 #[cfg_attr(not(debug_assertions), allow(unused))]
