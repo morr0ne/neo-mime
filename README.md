@@ -1,3 +1,5 @@
+# Based on the apparently unmaintained [mime crate](https://github.com/hyperium/mime)
+
 # mime
 
 [![Build Status](https://travis-ci.org/hyperium/mime.svg?branch=master)](https://travis-ci.org/hyperium/mime)
