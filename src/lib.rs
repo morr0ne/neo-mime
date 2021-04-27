@@ -119,7 +119,7 @@ mod error;
 #[cfg(feature = "macro")]
 mod macros;
 mod range;
-#[cfg(feature = "serde1")]
+#[cfg(feature = "serde")]
 mod serde;
 mod type_;
 mod value;
