@@ -106,12 +106,12 @@ use proc_macro_hack::proc_macro_hack;
 #[proc_macro_hack]
 pub use neo_mime_macro::media_type;
 
-pub use neo_mime_parse::constants::names::*;
 pub use self::constants::mimes::*;
 pub use self::error::InvalidMime;
 pub use self::range::MediaRange;
 pub use self::type_::MediaType;
 pub use self::value::{Value, UTF_8};
+pub use neo_mime_parse::constants::names::*;
 
 mod cmp;
 mod constants;
@@ -123,7 +123,6 @@ mod range;
 mod serde;
 mod type_;
 mod value;
-
 
 fn _assert_traits() {
     fn assert_send_sync<T: Send + Sync>() {}
