@@ -1,4 +1,4 @@
-#![doc(html_root_url = "https://docs.rs/neo-mime/0.3.6")]
+#![doc(html_root_url = "https://docs.rs/neo-mime/0.1.1")]
 #![deny(warnings)]
 #![deny(missing_docs)]
 #![deny(missing_debug_implementations)]

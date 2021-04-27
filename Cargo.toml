@@ -1,6 +1,6 @@
 [package]
 name = "neo-mime"
-version = "0.1.0" # remember to update html_root_url
+version = "0.1.1" # remember to update html_root_url
 authors = ["Federico Morrone <contact@morrone.dev>", "Sean McArthur <sean@seanmonstar.com>"]
 license = "MIT"
 description = "Strongly Typed Mimes"
