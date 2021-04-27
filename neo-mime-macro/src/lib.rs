@@ -1,8 +1,8 @@
 extern crate proc_macro;
 
 use proc_macro::TokenStream;
-use proc_macro_hack::proc_macro_hack;
 use proc_macro2::Span;
+use proc_macro_hack::proc_macro_hack;
 use quote::quote;
 
 #[proc_macro_hack]
@@ -24,13 +24,13 @@ pub fn media_type(tokens: TokenStream) -> TokenStream {
             quote! {
                 $crate::private::Source::Atom(0, #s)
             }
-        },
+        }
         a => {
             let s = mime.as_ref();
             quote! {
                 $crate::private::Source::Atom(#a, #s)
             }
-        },
+        }
     };
     let slash = mime.private_subtype_offset();
     let plus = match mime.private_suffix_offset() {
@@ -66,13 +66,10 @@ fn parse_mime_lit(value: &str) -> Result<neo_mime_parse::Mime, String> {
 
     match mime {
         Ok(mime) => match mime.private_params_source() {
-            neo_mime_parse::ParamSource::None |
-            neo_mime_parse::ParamSource::Utf8(_) => Ok(mime),
+            neo_mime_parse::ParamSource::None | neo_mime_parse::ParamSource::Utf8(_) => Ok(mime),
             neo_mime_parse::ParamSource::One(..) => Ok(mime),
-            _ => Err("multiple parameters not supported yet".into())
+            _ => Err("multiple parameters not supported yet".into()),
         },
-        Err(err) => {
-            Err(format!("invalid MediaType: {}", err))
-        }
+        Err(err) => Err(format!("invalid MediaType: {}", err)),
     }
 }

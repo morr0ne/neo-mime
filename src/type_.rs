@@ -141,7 +141,6 @@ impl MediaType {
         crate::value::param(&self.mime, attr)
     }
 
-
     /// Returns an iterator over the parameters.
     ///
     /// # Example
@@ -207,7 +206,11 @@ impl MediaType {
 
     #[cfg(test)]
     pub(super) fn test_assert_asterisks(&self) {
-        assert!(!self.as_ref().contains('*'), "{:?} contains an asterisk", self);
+        assert!(
+            !self.as_ref().contains('*'),
+            "{:?} contains an asterisk",
+            self
+        );
     }
 }
 
@@ -225,7 +228,7 @@ impl PartialEq<str> for MediaType {
 
 impl<'a> PartialEq<&'a str> for MediaType {
     #[inline]
-    fn eq(&self, s: & &'a str) -> bool {
+    fn eq(&self, s: &&'a str) -> bool {
         self == *s
     }
 }
@@ -295,7 +298,6 @@ mod tests {
         assert_eq!(TEXT_PLAIN.type_(), TEXT);
     }
 
-
     #[test]
     fn test_subtype() {
         assert_eq!(TEXT_PLAIN.subtype(), PLAIN);
@@ -331,8 +333,14 @@ mod tests {
     fn test_media_type_from_str() {
         assert_eq!(MediaType::parse("text/plain").unwrap(), TEXT_PLAIN);
         assert_eq!(MediaType::parse("TEXT/PLAIN").unwrap(), TEXT_PLAIN);
-        assert_eq!(MediaType::parse("text/plain; charset=utf-8").unwrap(), TEXT_PLAIN_UTF_8);
-        assert_eq!(MediaType::parse("text/plain;charset=\"utf-8\"").unwrap(), TEXT_PLAIN_UTF_8);
+        assert_eq!(
+            MediaType::parse("text/plain; charset=utf-8").unwrap(),
+            TEXT_PLAIN_UTF_8
+        );
+        assert_eq!(
+            MediaType::parse("text/plain;charset=\"utf-8\"").unwrap(),
+            TEXT_PLAIN_UTF_8
+        );
 
         // quotes + semi colon
         MediaType::parse("text/plain;charset=\"utf-8\"; foo=bar").unwrap();
@@ -342,7 +350,6 @@ mod tests {
         assert_eq!(upper, TEXT_PLAIN);
         assert_eq!(upper.type_(), TEXT);
         assert_eq!(upper.subtype(), PLAIN);
-
 
         let extended = MediaType::parse("TEXT/PLAIN; CHARSET=UTF-8; FOO=BAR").unwrap();
         assert_eq!(extended, "text/plain; charset=utf-8; foo=BAR");
@@ -363,7 +370,6 @@ mod tests {
         MediaType::parse("text/plain; charset=\r\nutf-8").unwrap_err();
         MediaType::parse("text/plain; charset=\"\r\nutf-8\"").unwrap_err();
     }
-
 
     #[test]
     fn test_from_str_empty_parameter_list() {
@@ -397,7 +403,8 @@ mod tests {
 
     #[test]
     fn test_case_sensitive_values() {
-        let mime = MediaType::parse("multipart/form-data; charset=BASE64; boundary=ABCDEFG").unwrap();
+        let mime =
+            MediaType::parse("multipart/form-data; charset=BASE64; boundary=ABCDEFG").unwrap();
         assert_eq!(mime.param(CHARSET).unwrap(), "bAsE64");
         assert_eq!(mime.param(BOUNDARY).unwrap(), "ABCDEFG");
         assert_eq!(mime.param(BOUNDARY).unwrap().as_str_repr(), "ABCDEFG");
@@ -416,7 +423,6 @@ mod tests {
         assert_eq!(mime.param(CHARSET).unwrap(), "utf-8");
         assert_eq!(mime.param("foo").unwrap(), "bar");
         assert_eq!(mime.param("baz"), None);
-
 
         let mime = MediaType::parse("text/plain;charset=\"utf-8\"").unwrap();
         assert_eq!(mime.param(CHARSET), Some(UTF_8));
@@ -531,4 +537,3 @@ mod tests {
         assert_ne!(mime1, mime2);
     }
 }
-

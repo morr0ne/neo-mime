@@ -3,10 +3,10 @@ use std::fmt;
 use serde::de::{self, Deserialize, Deserializer};
 use serde::ser::{Serialize, Serializer};
 
-use super::{MediaType, MediaRange};
+use super::{MediaRange, MediaType};
 
 macro_rules! serde_impl {
-    ($ty:ident) => (
+    ($ty:ident) => {
         impl Serialize for $ty {
             fn serialize<S>(&self, serializer: S) -> Result<S::Ok, S::Error>
             where
@@ -41,7 +41,7 @@ macro_rules! serde_impl {
                 deserializer.deserialize_str(Visitor)
             }
         }
-    )
+    };
 }
 
 serde_impl!(MediaType);

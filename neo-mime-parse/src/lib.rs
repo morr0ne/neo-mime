@@ -60,10 +60,7 @@ pub enum ParseError {
     MissingSlash,
     MissingEqual,
     MissingQuote,
-    InvalidToken {
-        pos: usize,
-        byte: Byte,
-    },
+    InvalidToken { pos: usize, byte: Byte },
     InvalidRange,
     TooLong,
 }
@@ -85,14 +82,15 @@ impl fmt::Debug for Byte {
     }
 }
 
-impl Error for ParseError {
-}
+impl Error for ParseError {}
 
 impl fmt::Display for ParseError {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         let description = match self {
             ParseError::MissingSlash => "a slash (/) was missing between the type and subtype",
-            ParseError::MissingEqual => "an equals sign (=) was missing between a parameter and its value",
+            ParseError::MissingEqual => {
+                "an equals sign (=) was missing between a parameter and its value"
+            }
             ParseError::MissingQuote => "a quote (\") was missing from a parameter value",
             ParseError::InvalidToken { .. } => "invalid token",
             ParseError::InvalidRange => "unexpected asterisk",
@@ -128,7 +126,8 @@ impl Mime {
     #[inline]
     pub fn suffix(&self) -> Option<&str> {
         let end = self.semicolon_or_end();
-        self.plus.map(|idx| &self.source.as_ref()[idx as usize + 1..end])
+        self.plus
+            .map(|idx| &self.source.as_ref()[idx as usize + 1..end])
     }
 
     #[doc(hidden)]
@@ -142,12 +141,10 @@ impl Mime {
             ParamSource::Utf8(_) => ParamsInner::Utf8,
             ParamSource::One(_, a) => ParamsInner::Inlined(&self.source, Inline::One(a)),
             ParamSource::Two(_, a, b) => ParamsInner::Inlined(&self.source, Inline::Two(a, b)),
-            ParamSource::Custom(_, ref params) => {
-                ParamsInner::Custom {
-                    source: &self.source,
-                    params: params.iter(),
-                }
-            }
+            ParamSource::Custom(_, ref params) => ParamsInner::Custom {
+                source: &self.source,
+                params: params.iter(),
+            },
             ParamSource::None => ParamsInner::None,
         };
 
@@ -188,17 +185,18 @@ impl Mime {
     #[inline]
     fn semicolon(&self) -> Option<usize> {
         match self.params {
-            ParamSource::Utf8(i) |
-            ParamSource::One(i, ..) |
-            ParamSource::Two(i, ..) |
-            ParamSource::Custom(i, _) => Some(i as usize),
+            ParamSource::Utf8(i)
+            | ParamSource::One(i, ..)
+            | ParamSource::Two(i, ..)
+            | ParamSource::Custom(i, _) => Some(i as usize),
             ParamSource::None => None,
         }
     }
 
     #[inline]
     fn semicolon_or_end(&self) -> usize {
-        self.semicolon().unwrap_or_else(|| self.source.as_ref().len())
+        self.semicolon()
+            .unwrap_or_else(|| self.source.as_ref().len())
     }
 
     #[doc(hidden)]
@@ -262,7 +260,7 @@ fn as_u16(i: usize) -> u16 {
 
 #[inline]
 fn range(index: (u16, u16)) -> std::ops::Range<usize> {
-    index.0 as usize .. index.1 as usize
+    index.0 as usize..index.1 as usize
 }
 
 // ===== impl Parser =====
@@ -270,23 +268,18 @@ fn range(index: (u16, u16)) -> std::ops::Range<usize> {
 impl Parser {
     #[inline]
     pub fn can_range() -> Self {
-        Parser {
-            can_range: true,
-        }
+        Parser { can_range: true }
     }
 
     #[inline]
     pub fn cannot_range() -> Self {
-        Parser {
-            can_range: false,
-        }
+        Parser { can_range: false }
     }
 
     pub fn parse(&self, src: impl Parse) -> Result<Mime, ParseError> {
         rfc7231::parse(self, src)
     }
 }
-
 
 fn lower_ascii_with_params(s: &str, semi: usize, params: &[IndexedPair]) -> String {
     let mut owned = s.to_owned();
@@ -305,9 +298,7 @@ fn lower_ascii_with_params(s: &str, semi: usize, params: &[IndexedPair]) -> Stri
     owned
 }
 
-
 // Params ===================
-
 
 enum ParamsInner<'a> {
     Utf8,
@@ -318,7 +309,6 @@ enum ParamsInner<'a> {
     },
     None,
 }
-
 
 enum Inline {
     Done,
@@ -345,34 +335,33 @@ impl<'a> Iterator for Params<'a> {
                 let value = ("charset", "utf-8");
                 self.0 = ParamsInner::None;
                 Some(value)
-            },
+            }
             ParamsInner::Inlined(source, ref mut inline) => {
                 let next = match *inline {
-                    Inline::Done => {
-                        None
-                    }
+                    Inline::Done => None,
                     Inline::One(one) => {
                         *inline = Inline::Done;
                         Some(one)
-                    },
+                    }
                     Inline::Two(one, two) => {
                         *inline = Inline::One(two);
                         Some(one)
-                    },
+                    }
                 };
                 next.map(|(name, value)| {
                     let name = &source.as_ref()[range(name)];
                     let value = &source.as_ref()[range(value)];
                     (name, value)
                 })
-            },
-            ParamsInner::Custom { source, ref mut params } => {
-                params.next().map(|&(name, value)| {
-                    let name = &source.as_ref()[range(name)];
-                    let value = &source.as_ref()[range(value)];
-                    (name, value)
-                })
-            },
+            }
+            ParamsInner::Custom {
+                source,
+                ref mut params,
+            } => params.next().map(|&(name, value)| {
+                let name = &source.as_ref()[range(name)];
+                let value = &source.as_ref()[range(value)];
+                (name, value)
+            }),
             ParamsInner::None => None,
         }
     }
@@ -413,4 +402,3 @@ impl<'a> Sealed for &'a String {
 }
 
 impl<'a> Parse for &'a String {}
-
