@@ -1,7 +1,7 @@
 use std::fmt;
 
-use serde1::de::{self, Deserialize, Deserializer};
-use serde1::ser::{Serialize, Serializer};
+use serde::de::{self, Deserialize, Deserializer};
+use serde::ser::{Serialize, Serializer};
 
 use super::{MediaType, MediaRange};
 
