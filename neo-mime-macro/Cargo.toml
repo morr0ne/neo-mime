@@ -13,7 +13,7 @@ proc-macro = true
 
 [dependencies]
 neo-mime-parse = { path = "../neo-mime-parse", version = "0.1.0" }
-proc-macro2 = "0.4"
+proc-macro2 = "1.0.26"
 proc-macro-hack = "0.5"
-quote = "0.6"
-syn = "0.15"
+quote = "1.0.9"
+syn = "1.0.70"
