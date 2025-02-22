@@ -3,7 +3,7 @@ name = "neo-mime-macro"
 version = "0.1.1"
 description = "mime procedural macros"
 repository = "https://github.com/morr0ne/neo-mime"
-authors = ["Federico Morrone <contact@morrone.dev>", "Sean McArthur <sean@seanmonstar.com>"]
+authors = ["Matilde Morrone <contact@morrone.dev>", "Sean McArthur <sean@seanmonstar.com>"]
 license = "MIT"
 edition = "2018"
 
